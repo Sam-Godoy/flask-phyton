@@ -1,19 +1,20 @@
-from flask import Flask, render_template, request, Response, jsonify, redirect, url_for
-import database as dbase
+from flask import Flask, render_template, request, jsonify, redirect, url_for
+import database as dbase  
 from product import Product
 
+# Conexión a la base de datos
 db = dbase.dbConnection()
 
 app = Flask(__name__)
 
-# Rutas de la aplicación
+# Ruta principal para mostrar todos los productos
 @app.route('/')
 def home():
     products = db['products']
-    productsReceived = products.find()
-    return render_template('index.html', products = productsReceived)
+    products_received = products.find()  # Obtiene todos los productos de la colección
+    return render_template('index.html', products=products_received)
 
-# Método POST para agregar un producto
+# Ruta para agregar un nuevo producto (POST)
 @app.route('/products', methods=['POST'])
 def addProduct():
     products = db['products']
@@ -24,25 +25,19 @@ def addProduct():
     if name and price and quantity:
         product = Product(name, price, quantity)
         products.insert_one(product.toDBCollection())
-        response = jsonify({
-            'name': name,
-            'price': price,
-            'quantity': quantity
-        })
-        response.status_code = 201  
-        return redirect(url_for('home'))  
+        return redirect(url_for('home'))
     else:
-        return notFound()  
-    
-    #method delete
+        return notFound()
+
+# Ruta para eliminar un producto (DELETE)
 @app.route('/delete/<string:product_name>')
 def delete(product_name):
     products = db['products']
-    products.delete_one({'name' : product_name})
+    products.delete_one({'name': product_name})
     return redirect(url_for('home'))
 
-#method put
-@app.route('edit/<string:product_name>', methods=['POST'])
+# Ruta para editar un producto (PUT)
+@app.route('/edit/<string:product_name>', methods=['POST'])
 def edit(product_name):
     products = db['products']
     name = request.form['name']
@@ -50,16 +45,19 @@ def edit(product_name):
     quantity = request.form['quantity']
 
     if name and price and quantity:
-        products.update_one({'name':product_name}, {'$set' : {'name' : name, 'price' : price, 'quantity': quantity}})
-        response = jsonify({'message' 'Producto' + product_name + ' actualizado correctamente'})
+        products.update_one(
+            {'name': product_name},
+            {'$set': {'name': name, 'price': float(price), 'quantity': int(quantity)}}
+        )
         return redirect(url_for('home'))
     else:
         return notFound()
 
+# Manejo de errores 404
 @app.errorhandler(404)
 def notFound(error=None):
     message = {
-        'message': 'No encontrado: ' + request.url,
+        'message': 'No encontrado ' + request.url,
         'status': '404 Not Found'
     }
     response = jsonify(message)
