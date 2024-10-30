@@ -1,0 +1,133 @@
+/* Estilos generales */
+body {
+    background-color: #1e1e1e;
+    font-family: Arial, sans-serif;
+    color: #e0e0e0;
+}
+
+/* Título principal */
+h1 {
+    color: #a064ff;
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Estilo de las tarjetas */
+.card {
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(160, 100, 255, 0.3);
+    border: none;
+    background-color: #2e2e2e;
+    color: #e0e0e0;
+}
+
+/* Cabecera de las tarjetas */
+.card-header {
+    background-color: #a064ff;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 15px 0;
+    border-bottom: 2px solid #7a49c4;
+}
+
+/* Estilo del formulario */
+label {
+    font-weight: 600;
+    color: #c9c9c9;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border: 1px solid #7a49c4;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #a064ff;
+    box-shadow: 0px 0px 8px rgba(160, 100, 255, 0.4);
+}
+
+/* Botón Guardar */
+.btn-primary {
+    background-color: #a064ff;
+    border-color: #a064ff;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #7a49c4;
+    border-color: #7a49c4;
+}
+
+/* Botón Eliminar */
+.btn-danger {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
+/* Lista de productos */
+.list-group-item {
+    background-color: #2e2e2e;
+    color: #e0e0e0;
+    border: 1px solid #7a49c4;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.list-group-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 4px 8px rgba(160, 100, 255, 0.2);
+}
+
+/* Espaciado entre tarjetas */
+.row > .col {
+    margin-bottom: 20px;
+}
+
+/* Estilos para el contenedor de productos */
+.card-body ul {
+    padding: 0;
+}
+
+/* Estilos adicionales para responsividad */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .btn-primary,
+    .btn-danger {
+        width: 100%;
+        padding: 10px;
+    }
+}
